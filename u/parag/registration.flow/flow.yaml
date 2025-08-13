@@ -1,0 +1,77 @@
+summary: 'Auth: Registration (SHA-256 → MySql → 201 JSON)'
+description: >-
+  Takes username, email, password; hashes with SHA-256; inserts a row into
+  Postgres; returns a 201 JSON payload.
+value:
+  modules:
+    - id: hash_password
+      summary: Hash password with SHA-256
+      value:
+        type: rawscript
+        content: '!inline hash_password_with_sha-256.inline_script.deno.ts'
+        input_transforms:
+          password:
+            type: javascript
+            expr: flow_input.password
+        assets: []
+        lock: ''
+        language: deno
+    - id: insert_user
+      summary: Insert user into MySql and return basic profile
+      value:
+        type: script
+        input_transforms:
+          db_resource_path:
+            type: static
+            value: u/parag/mysql
+          email:
+            type: javascript
+            expr: flow_input.email
+          password_hash:
+            type: javascript
+            expr: results.hash_password
+          username:
+            type: javascript
+            expr: flow_input.username
+          users_table:
+            type: static
+            value: user
+        hash: null
+        is_trigger: false
+        path: u/parag/registration/insert_user
+      continue_on_error: false
+    - id: respond_201
+      summary: Return 201 JSON payload
+      value:
+        type: rawscript
+        content: '!inline return_201_json_payload.inline_script.deno.ts'
+        input_transforms:
+          user:
+            type: javascript
+            expr: results.insert_user
+        assets: []
+        lock: ''
+        language: deno
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  order:
+    - username
+    - password
+    - email
+  properties:
+    email:
+      type: string
+      format: email
+    password:
+      type: string
+      minLength: 1
+    username:
+      type: string
+      description: ''
+      default: ''
+      minLength: 1
+  required:
+    - username
+    - password
+    - email

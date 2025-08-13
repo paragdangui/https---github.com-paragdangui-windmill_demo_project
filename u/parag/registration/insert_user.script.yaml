@@ -1,0 +1,39 @@
+summary: Insert user into MySql and return basic profile
+description: This script was edited in place of flow u/parag/registration  by parag.
+lock: '!inline u/parag/registration/insert_user.script.lock'
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties:
+    db_resource_path:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    email:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    password_hash:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    username:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    users_table:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+  required:
+    - username
+    - email
+    - password_hash
+    - users_table
+    - db_resource_path

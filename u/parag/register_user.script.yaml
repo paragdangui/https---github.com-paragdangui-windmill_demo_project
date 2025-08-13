@@ -1,0 +1,52 @@
+summary: register_user
+description: |+
+  Registers a new user. Includes the following:
+  1. Crypto hashing.
+  2. inserting new user into the mysql table.
+  3. Using SMTP to send a verification email to the newly registered user.
+
+lock: '!inline u/parag/register_user.script.lock'
+kind: script
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  prompt_for_ai: ''
+  properties:
+    body:
+      type: object
+      description: ''
+      default: null
+      format: resource-body
+      properties:
+        email:
+          type: string
+          description: ''
+          originalType: string
+        password:
+          type: string
+          description: ''
+          originalType: string
+        username:
+          type: string
+          description: ''
+          originalType: string
+    mysql_resource:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    public_base_url:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    smtp_resource:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+  required:
+    - body
+    - mysql_resource
+    - smtp_resource
+    - public_base_url

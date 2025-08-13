@@ -1,0 +1,40 @@
+summary: ''
+description: ''
+value:
+  modules: []
+  failure_module:
+    id: failure
+    value:
+      type: rawscript
+      content: >
+
+        export async function main(message: string, name: string, step_id:
+        string) {
+          const flow_id = process.env.WM_ROOT_FLOW_JOB_ID
+          console.log("message", message)
+          console.log("name",name)
+          console.log("step_id", step_id)
+          return { message, flow_id, step_id, recover: false }
+        }
+      input_transforms:
+        name:
+          type: javascript
+          expr: error.name
+        message:
+          type: javascript
+          expr: error.message
+        step_id:
+          type: javascript
+          expr: error.step_id
+      language: bun
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  order:
+    - sdfsdf
+  properties:
+    sdfsdf:
+      type: string
+      description: ''
+      default: ''
+  required: []

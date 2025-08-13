@@ -1,0 +1,43 @@
+description: ''
+format_extension: null
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  order:
+    - Name
+    - Host
+    - Port
+    - Database
+    - User
+    - Password
+    - SSL mode
+  properties:
+    Database:
+      type: string
+      description: ''
+      default: ''
+    Host:
+      type: string
+      description: ''
+      default: ''
+    Name:
+      type: string
+      description: ''
+      default: ''
+    Password:
+      type: string
+      description: ''
+      default: ''
+    Port:
+      type: string
+      description: ''
+      default: ''
+    SSL mode:
+      type: string
+      description: ''
+      default: ''
+    User:
+      type: string
+      description: ''
+      default: ''
+  required: []

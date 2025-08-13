@@ -1,0 +1,10 @@
+description: ''
+value:
+  database: windmill_db
+  host: mysql
+  password: windmill_user_password
+  port: 3306
+  root_certificate_pem: ''
+  ssl: false
+  user: windmill_user
+resource_type: mysql

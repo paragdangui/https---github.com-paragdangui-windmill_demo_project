@@ -1,0 +1,27 @@
+summary: Error Handling script
+description: Fork of hub/13953/windmill/trigger_error_handler_template
+lock: '!inline u/parag/error_handling.script.lock'
+kind: failure
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  properties:
+    name:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    message:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+    step_id:
+      type: string
+      description: ''
+      default: null
+      originalType: string
+  required:
+    - message
+    - name
+    - step_id
